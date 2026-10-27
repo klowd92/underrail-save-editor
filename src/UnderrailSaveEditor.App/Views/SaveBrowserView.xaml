@@ -1,0 +1,87 @@
+<UserControl x:Class="UnderrailSaveEditor.App.Views.SaveBrowserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="280">
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Margin="0,0,0,12"
+                BorderBrush="{DynamicResource AccentOrange}"
+                BorderThickness="0,0,0,2"
+                Padding="0,0,0,8">
+            <TextBlock Text="Save Files"
+                       FontSize="16" FontWeight="SemiBold"
+                       Foreground="{DynamicResource AccentOrange}"/>
+        </Border>
+
+        <!-- Directory Selection -->
+        <Grid Grid.Row="1" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0"
+                     Text="{Binding SavesDirectory, UpdateSourceTrigger=PropertyChanged}"
+                     VerticalContentAlignment="Center"
+                     Height="28"
+                     Margin="0,0,4,0"
+                     FontSize="11"/>
+            <Button Grid.Column="1" Content="..."
+                    Command="{Binding BrowseDirectoryCommand}"
+                    Width="28" Height="28"
+                    Style="{StaticResource SmallButton}"/>
+        </Grid>
+
+        <!-- Refresh Button -->
+        <Button Grid.Row="2" Content="Refresh"
+                Command="{Binding RefreshCommand}"
+                Style="{StaticResource OrangeButton}"
+                HorizontalAlignment="Stretch"
+                Margin="0,0,0,12"/>
+
+        <!-- Save File List: compact game-style rows with the character's portrait -->
+        <ListBox Grid.Row="3"
+                 ItemsSource="{Binding SaveFiles}"
+                 SelectedItem="{Binding SelectedSave}"
+                 HorizontalContentAlignment="Stretch">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                    <Setter Property="Padding" Value="4,3,8,3"/>
+                    <Setter Property="ToolTip" Value="{Binding FolderPath}"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="34" Height="34" Margin="0,0,8,0" Background="#0A0A0A"
+                                BorderBrush="{StaticResource GameItemBorderBrush}" BorderThickness="1">
+                            <Image Source="{Binding Portrait}" Stretch="UniformToFill"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding FolderName}" FontSize="15" FontWeight="SemiBold"
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Text="{Binding DetailLine}" FontSize="11.5" Opacity="0.75"
+                                       TextTrimming="CharacterEllipsis"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

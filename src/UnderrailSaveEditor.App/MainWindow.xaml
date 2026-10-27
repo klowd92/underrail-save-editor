@@ -1,0 +1,210 @@
+<Window x:Class="UnderrailSaveEditor.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:UnderrailSaveEditor.App.Views"
+        mc:Ignorable="d"
+        Title="Underrail Save Editor" Height="860" Width="1280"
+        Icon="Assets/app.ico"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BackgroundDark}"
+        Foreground="{DynamicResource TextPrimary}"
+        FontSize="14">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="32"
+                      ResizeBorderThickness="5"
+                      GlassFrameThickness="0"
+                      CornerRadius="0"
+                      UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Custom Title Bar -->
+        <Border Grid.Row="0"
+                Background="{DynamicResource BackgroundMedium}"
+                BorderBrush="{DynamicResource AccentOrange}"
+                BorderThickness="0,0,0,2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- App Icon/Title -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="8,0,0,0" VerticalAlignment="Center">
+                    <Image Source="Assets/app.ico" Width="18" Height="18" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Underrail Save Editor" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource AccentOrange}" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Window Control Buttons -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button x:Name="AboutButton" Content="?" Width="46" Height="32" FontWeight="Bold" FontSize="15"
+                            Style="{StaticResource WindowControlButton}" Click="AboutButton_Click"
+                            ToolTip="About, author and copyright"/>
+                    <Button x:Name="MinimizeButton" Content="─" Width="46" Height="32"
+                            Style="{StaticResource WindowControlButton}" Click="MinimizeButton_Click"/>
+                    <Button x:Name="MaximizeButton" Content="□" Width="46" Height="32"
+                            Style="{StaticResource WindowControlButton}" Click="MaximizeButton_Click"/>
+                    <Button x:Name="CloseButton" Content="✕" Width="46" Height="32"
+                            Style="{StaticResource WindowCloseButton}" Click="CloseButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320" MinWidth="220"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Left Panel: Save Browser with orange border -->
+        <Border Grid.Column="0" Grid.Row="0"
+                Background="{DynamicResource BackgroundDark}"
+                BorderBrush="{DynamicResource BorderDim}"
+                BorderThickness="0,0,1,0">
+            <views:SaveBrowserView DataContext="{Binding SaveBrowser}"/>
+        </Border>
+
+        <!-- Splitter -->
+        <GridSplitter Grid.Column="1" Grid.Row="0" Width="3"
+                      HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                      Background="{DynamicResource BorderDim}"/>
+
+        <!-- Right Panel: Tab Control with game-style tabs -->
+        <Border Grid.Column="2" Grid.Row="0"
+                Background="{DynamicResource BackgroundDark}"
+                BorderBrush="{DynamicResource AccentOrange}"
+                BorderThickness="2"
+                Margin="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Custom Tab Header Bar -->
+                <Border Grid.Row="0"
+                        Background="{DynamicResource BackgroundMedium}"
+                        BorderBrush="{DynamicResource AccentOrange}"
+                        BorderThickness="0,0,0,2">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Disabled">
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="TabGeneral" Content="General"
+                                         GroupName="MainTabs" IsChecked="True"
+                                         Style="{StaticResource GameTabRadioButton}"/>
+                            <RadioButton x:Name="TabAbilities" Content="Base"
+                                         GroupName="MainTabs"
+                                         Style="{StaticResource GameTabRadioButton}"/>
+                            <RadioButton x:Name="TabSkills" Content="Skills"
+                                         GroupName="MainTabs"
+                                         Style="{StaticResource GameTabRadioButton}"/>
+                            <RadioButton x:Name="TabFeats" Content="Feats"
+                                         GroupName="MainTabs"
+                                         Style="{StaticResource GameTabRadioButton}"/>
+                            <RadioButton x:Name="TabSpecializations" Content="Specializations"
+                                         GroupName="MainTabs"
+                                         Style="{StaticResource GameTabRadioButton}"/>
+                            <RadioButton x:Name="TabCapabilities" Content="Capabilities"
+                                         GroupName="MainTabs"
+                                         Style="{StaticResource GameTabRadioButton}"/>
+                            <RadioButton x:Name="TabInventory" Content="Inventory"
+                                         GroupName="MainTabs"
+                                         Style="{StaticResource GameTabRadioButton}"/>
+                            <RadioButton x:Name="TabCrafting" Content="Crafting"
+                                         GroupName="MainTabs"
+                                         Style="{StaticResource GameTabRadioButton}"/>
+                            <RadioButton x:Name="TabGameVariables" Content="Variables"
+                                         GroupName="MainTabs"
+                                         Style="{StaticResource GameTabRadioButton}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+
+                <!-- Tab Content Area -->
+                <Grid Grid.Row="1" IsEnabled="{Binding IsSaveLoaded}">
+                    <views:GeneralTabView DataContext="{Binding GeneralTab}"
+                                          Visibility="{Binding IsChecked, ElementName=TabGeneral, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <views:AbilitiesTabView DataContext="{Binding AbilitiesTab}"
+                                            Visibility="{Binding IsChecked, ElementName=TabAbilities, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <views:SkillsTabView DataContext="{Binding SkillsTab}"
+                                         Visibility="{Binding IsChecked, ElementName=TabSkills, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <views:FeatsTabView DataContext="{Binding FeatsTab}"
+                                        Visibility="{Binding IsChecked, ElementName=TabFeats, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <views:SpecializationsTabView DataContext="{Binding SpecializationsTab}"
+                                                  Visibility="{Binding IsChecked, ElementName=TabSpecializations, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <views:CapabilitiesTabView DataContext="{Binding CapabilitiesTab}"
+                                               Visibility="{Binding IsChecked, ElementName=TabCapabilities, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <views:InventoryTabView DataContext="{Binding InventoryTab}"
+                                            Visibility="{Binding IsChecked, ElementName=TabInventory, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <views:CraftingTabView DataContext="{Binding CraftingTab}"
+                                           Visibility="{Binding IsChecked, ElementName=TabCrafting, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <views:GameVariablesTabView DataContext="{Binding GameVariablesTab}"
+                                                Visibility="{Binding IsChecked, ElementName=TabGameVariables, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Status Bar -->
+        <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1"
+                Background="{DynamicResource BackgroundMedium}"
+                BorderBrush="{DynamicResource AccentOrange}"
+                BorderThickness="0,2,0,0"
+                Padding="12,8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <DockPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,12,0">
+                    <TextBlock DockPanel.Dock="Right" Text=" *"
+                               Foreground="{DynamicResource AccentOrange}"
+                               Visibility="{Binding HasUnsavedChanges, Converter={StaticResource BoolToVisibilityConverter}}"
+                               VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               FontSize="16"
+                               ToolTip="Unsaved changes"/>
+                    <TextBlock Text="{Binding StatusText}" ToolTip="{Binding StatusText}"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center"/>
+                </DockPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding GameText}"
+                               Foreground="{DynamicResource TextSecondary}"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"
+                               ToolTip="Unofficial tool by klowd92. Underrail and its assets © Stygian Software. Click ? in the title bar for details."/>
+                    <Button Content="Game folder..." Command="{Binding ChangeGameFolderCommand}"
+                            Style="{StaticResource OrangeButton}" Padding="10,5" Margin="0,0,16,0"
+                            ToolTip="Choose the Underrail installation the editor uses (applies after a restart)"/>
+                    <Button Content="Reload" Command="{Binding ReloadCommand}"
+                            Style="{StaticResource OrangeButton}"
+                            MinWidth="90" Margin="0,0,8,0"/>
+                    <Button Content="Save As..." Command="{Binding SaveAsCommand}"
+                            Style="{StaticResource OrangeButton}"
+                            MinWidth="90" Margin="0,0,8,0"/>
+                    <Button Content="Save" Command="{Binding SaveCommand}"
+                            Style="{StaticResource GreenButton}"
+                            MinWidth="90"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        </Grid>
+    </Grid>
+</Window>

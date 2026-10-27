@@ -1,0 +1,219 @@
+<UserControl x:Class="UnderrailSaveEditor.App.Views.CapabilitiesTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="800" d:DesignWidth="900">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Margin="0,0,0,16"
+                BorderBrush="{DynamicResource AccentOrange}"
+                BorderThickness="0,0,0,2"
+                Padding="0,0,0,8">
+            <TextBlock Text="Capabilities &amp; Immunities"
+                       FontSize="16" FontWeight="SemiBold"
+                       Foreground="{DynamicResource AccentOrange}"/>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="340"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Column: Movement, Vision, Detection, Status -->
+                <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                    <!-- Movement Section -->
+                    <TextBlock Text="Movement"
+                               FontSize="14" FontWeight="SemiBold"
+                               Foreground="{DynamicResource AccentOrange}"
+                               Margin="0,0,0,8"/>
+
+                    <Border Background="{DynamicResource BackgroundMedium}"
+                            BorderBrush="{DynamicResource BorderDim}"
+                            BorderThickness="1"
+                            Padding="12"
+                            Margin="0,0,0,16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Movement Speed"
+                                       VerticalAlignment="Center" Margin="0,0,0,8"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBox Grid.Row="0" Grid.Column="1"
+                                     Text="{Binding MovementSpeed, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalContentAlignment="Center"
+                                     Margin="0,0,0,8" Height="26"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Base Move Speed"
+                                       VerticalAlignment="Center" Margin="0,0,0,8"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBox Grid.Row="1" Grid.Column="1"
+                                     Text="{Binding BaseMovementSpeed, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalContentAlignment="Center"
+                                     Margin="0,0,0,8" Height="26"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Carry Capacity"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBox Grid.Row="2" Grid.Column="1"
+                                     Text="{Binding CarryCapacity, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalContentAlignment="Center"
+                                     Height="26"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Vision Section -->
+                    <TextBlock Text="Vision"
+                               FontSize="14" FontWeight="SemiBold"
+                               Foreground="{DynamicResource AccentOrange}"
+                               Margin="0,0,0,8"/>
+
+                    <Border Background="{DynamicResource BackgroundMedium}"
+                            BorderBrush="{DynamicResource BorderDim}"
+                            BorderThickness="1"
+                            Padding="12"
+                            Margin="0,0,0,16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Sight Range"
+                                       VerticalAlignment="Center" Margin="0,0,0,8"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBox Grid.Row="0" Grid.Column="1"
+                                     Text="{Binding SightRange, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalContentAlignment="Center"
+                                     Margin="0,0,0,8" Height="26"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Darkvision"
+                                       VerticalAlignment="Center" Margin="0,0,0,8"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <CheckBox Grid.Row="1" Grid.Column="1"
+                                      IsChecked="{Binding Darkvision}"
+                                      Margin="0,0,0,8"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Truesighted"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <CheckBox Grid.Row="2" Grid.Column="1"
+                                      IsChecked="{Binding Truesighted}"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Detection Section -->
+                    <TextBlock Text="Detection"
+                               FontSize="14" FontWeight="SemiBold"
+                               Foreground="{DynamicResource AccentOrange}"
+                               Margin="0,0,0,8"/>
+
+                    <Border Background="{DynamicResource BackgroundMedium}"
+                            BorderBrush="{DynamicResource BorderDim}"
+                            BorderThickness="1"
+                            Padding="12"
+                            Margin="0,0,0,16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Detection"
+                                       VerticalAlignment="Center" Margin="0,0,0,8"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBox Grid.Row="0" Grid.Column="1"
+                                     Text="{Binding Detection, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalContentAlignment="Center"
+                                     Margin="0,0,0,8" Height="26"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Detection Modifier"
+                                       VerticalAlignment="Center"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBox Grid.Row="1" Grid.Column="1"
+                                     Text="{Binding DetectionModifier, UpdateSourceTrigger=PropertyChanged}"
+                                     HorizontalContentAlignment="Center"
+                                     Height="26"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Status Flags Section -->
+                    <TextBlock Text="Status Flags"
+                               FontSize="14" FontWeight="SemiBold"
+                               Foreground="{DynamicResource AccentOrange}"
+                               Margin="0,0,0,8"/>
+
+                    <Border Background="{DynamicResource BackgroundMedium}"
+                            BorderBrush="{DynamicResource BorderDim}"
+                            BorderThickness="1"
+                            Padding="12">
+                        <WrapPanel Orientation="Horizontal">
+                            <CheckBox Content="Dead" IsChecked="{Binding Dead}"
+                                      Margin="0,0,16,6" MinWidth="100"/>
+                            <CheckBox Content="Passive" IsChecked="{Binding Passive}"
+                                      Margin="0,0,16,6" MinWidth="100"/>
+                            <CheckBox Content="Ethereal" IsChecked="{Binding Ethereal}"
+                                      Margin="0,0,16,6" MinWidth="100"/>
+                            <CheckBox Content="Psi Empathy" IsChecked="{Binding PsiEmpathy}"
+                                      Margin="0,0,16,6" MinWidth="100"/>
+                        </WrapPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- Right Column: Immunities -->
+                <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                    <TextBlock Text="Immunities"
+                               FontSize="14" FontWeight="SemiBold"
+                               Foreground="{DynamicResource AccentOrange}"
+                               Margin="0,0,0,8"/>
+
+                    <Border Background="{DynamicResource BackgroundMedium}"
+                            BorderBrush="{DynamicResource BorderDim}"
+                            BorderThickness="1"
+                            Padding="12">
+                        <ItemsControl ItemsSource="{Binding Immunities}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="3"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding DisplayName}"
+                                              IsChecked="{Binding IsEnabled}"
+                                              Margin="0,0,20,8"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

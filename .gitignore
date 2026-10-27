@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+*.user
+
+# Local reference screenshots of the game (Stygian Software's artwork) - not part of the project.
+screenshot/
+
+# Release packaging output
+dist/

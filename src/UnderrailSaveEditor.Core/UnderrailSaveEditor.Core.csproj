@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <!-- underrail.exe is a 32-bit assembly: every process that hosts it must be x86. -->
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>UnderrailSaveEditor.Core</RootNamespace>
+    <AssemblyName>UnderrailSaveEditor.Core</AssemblyName>
+  </PropertyGroup>
+
+  <!-- XNA 4.0 is installed with the game (GAC); used to decode the game's .xnb textures. Not copied to the output. -->
+  <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework">
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

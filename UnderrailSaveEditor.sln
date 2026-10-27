@@ -1,0 +1,31 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnderrailSaveEditor.Core", "src\UnderrailSaveEditor.Core\UnderrailSaveEditor.Core.csproj", "{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E01}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnderrailSaveEditor.App", "src\UnderrailSaveEditor.App\UnderrailSaveEditor.App.csproj", "{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E02}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaveTool", "tools\SaveTool\SaveTool.csproj", "{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B1C9F51-3D0A-4C8E-9F1E-2A7B5C1D0E03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

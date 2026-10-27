@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <!-- Hosts underrail.exe (32-bit) in-process. -->
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>UnderrailSaveEditor.App</RootNamespace>
+    <AssemblyName>UnderrailSaveEditor</AssemblyName>
+    <AssemblyTitle>Underrail Save Editor</AssemblyTitle>
+    <Product>Underrail Save Editor</Product>
+    <Version>2.0.0</Version>
+    <Authors>klowd92</Authors>
+    <Copyright>Editor by klowd92. Underrail and its assets are © Stygian Software.</Copyright>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UnderrailSaveEditor.Core\UnderrailSaveEditor.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\app.ico" />
+  </ItemGroup>
+
+</Project>
