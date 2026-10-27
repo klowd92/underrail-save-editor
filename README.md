@@ -54,6 +54,24 @@ Everything targets **x86**, because `underrail.exe` is a 32-bit assembly and mus
 | `tools/savediff.py` | Structural diff of two save files. Needs an MS-NRBF reader module (`nrbf.py`) on its path. |
 | `DESIGN.md` | How it works: hosting the game's code, finding things in an obfuscated assembly, icons, and why an earlier editor's saves were rejected by the game. |
 
+## Known limitations and TODO
+
+**Variables** (*Show all variables* lists the variables found in the game's dialogs; some are not covered):
+- [ ] **Map triggers.** Zone maps (`data\maps`) also set some variables. A sample of 400 of the ~2,500 zone files found only one new name, and a full scan takes minutes, so maps aren't scanned yet. A one-time background scan with a cache would cover them.
+- [ ] **Variables used only in the game's code** (about 90 seen in saves, e.g. faction counters). The code's string literals mix state variables with item and entity property names, which can't yet be told apart reliably, so they aren't listed.
+- **Variables created at run time** can't be known in advance: event start times, per-boat discovery flags (`BoatFullyDiscovered_<id>`), music overrides and map discovery flags. They appear once a save has them.
+- Dialog-only scratch variables (`tempcontext.`) are deliberately not listed: the game never saves them. A few misspelled paths in the game's own data (`contex.`, `tempcortex.`) are skipped too.
+
+**Inventory**
+- [ ] Equipping and unequipping items. Equipped items can be inspected and edited, but not moved or removed.
+
+**Compatibility**
+- Tested with Underrail 1.3.1.2 on Windows. Other game versions run after a self-check and a warning; please report problems.
+- [ ] Linux / Steam Deck (Proton, Wine): not tested. The game runs there, but the editor's WPF interface probably needs extra setup.
+
+**Crafting**
+- Some slots take several of the same component (the Minigun's barrel slot takes 6). The simulator fills slots with the required quantity, but in the game you need a stack of that size: with 5 barrels the game refuses to craft, without an error message.
+
 ## Disclaimer
 
 This is an unofficial, fan-made tool. It is not affiliated with, endorsed by or supported by Stygian Software.
