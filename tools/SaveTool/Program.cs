@@ -91,7 +91,9 @@ static class Program
                 {
                     var kv = a.Split('=');
                     var pq = kv[1].Split(':');
-                    parts[kv[0]] = rt.CreateItem(pq[0], 1, pq.Length > 1 ? int.Parse(pq[1]) : (int?)null);
+                    // Each slot gets the quantity the blueprint asks for (the Minigun's barrel slot takes 6).
+                    var count = bp.Slots.FirstOrDefault(sl => sl.Key == kv[0])?.Count ?? 1;
+                    parts[kv[0]] = rt.CreateItem(pq[0], count, pq.Length > 1 ? int.Parse(pq[1]) : (int?)null);
                 }
                 var sw2 = Stopwatch.StartNew();
                 var result = rt.Craft(bp, parts, save?.Player);
@@ -230,7 +232,8 @@ static class Program
             var components = parts.Skip(1).Select(x => x.Split('=')).ToDictionary(kv => kv[0], kv =>
             {
                 var pq = kv[1].Split(':');
-                return rt.CreateItem(pq[0], 1, pq.Length > 1 ? int.Parse(pq[1]) : (int?)null);
+                var count = bp.Slots.FirstOrDefault(sl => sl.Key == kv[0])?.Count ?? 1;
+                return rt.CreateItem(pq[0], count, pq.Length > 1 ? int.Parse(pq[1]) : (int?)null);
             });
             var result = rt.Craft(bp, components, p);
             if (!result.Success)

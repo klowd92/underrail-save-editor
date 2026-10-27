@@ -33,7 +33,7 @@ namespace UnderrailSaveEditor.App.ViewModels
         }
 
         public BlueprintSlot Slot { get; }
-        public string DisplayName => Slot.DisplayName + (Slot.Optional ? " (optional)" : "");
+        public string DisplayName => Slot.DisplayName + (Slot.Count > 1 ? $" ×{Slot.Count}" : "") + (Slot.Optional ? " (optional)" : "");
         public bool Optional => Slot.Optional;
         public IReadOnlyList<SlotOption> Options { get; }
 
@@ -59,8 +59,11 @@ namespace UnderrailSaveEditor.App.ViewModels
             set { if (SetProperty(ref _quality, value) && IsFilled) _onChanged(); }
         }
 
-        /// <summary>A fresh component instance for this slot, or null when empty.</summary>
-        public Item CreateComponent() => IsFilled ? _rt.CreateItem(Selected.Item.Path, 1, HasQuality ? Quality : (int?)null) : null;
+        /// <summary>
+        /// A fresh component stack for this slot, or null when empty. Some slots take several of the same item
+        /// (the Minigun's barrel slot takes 6); the game crafts stack / count items, so a short stack crafts nothing.
+        /// </summary>
+        public Item CreateComponent() => IsFilled ? _rt.CreateItem(Selected.Item.Path, Slot.Count, HasQuality ? Quality : (int?)null) : null;
     }
 
     public class RequirementModel
