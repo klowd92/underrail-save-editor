@@ -18,7 +18,8 @@ feat grants its abilities, exactly as in the game.
 - **Inventory**: equipped items and bag with the game's tooltips. Edit stacks, quality and durability; remove items; add any of the game's 1,400+ items.
 - **Crafting simulator**: all blueprints, laid out like the game's crafting window. Pick components and qualities to see the resulting item, its stats and the skill requirements.
   The game's own blueprint code computes the result, with the character's crafting feats applied. *Create* puts the item in the bag.
-- **Variables**: the global quest and world-state flags.
+- **Variables**: the global quest and world-state flags. *Show all variables* also lists the ~5,000 variables the game's dialogs use that the save hasn't set yet,
+  with their type and the dialogs that use them, so they can be set too.
 
 **Safety:** every save is written to temporary files, read back with the game's code, and only then moved into place.
 Replaced files are backed up to `%LOCALAPPDATA%\UnderrailSaveEditor\Backups`. **Save As** writes a new save folder.

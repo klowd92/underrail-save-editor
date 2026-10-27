@@ -60,16 +60,10 @@
                 </TextBox.Style>
             </TextBox>
 
-            <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Showing "
-                           Foreground="{DynamicResource TextSecondary}"/>
-                <TextBlock Text="{Binding FilteredVariables.Count, Mode=OneWay}"
-                           Foreground="{DynamicResource AccentOrange}"/>
-                <TextBlock Text=" of "
-                           Foreground="{DynamicResource TextSecondary}"/>
-                <TextBlock Text="{Binding AllVariables.Count, Mode=OneWay}"
-                           Foreground="{DynamicResource AccentOrange}"/>
-            </StackPanel>
+            <CheckBox Grid.Column="2" Margin="20,0,0,0" VerticalAlignment="Center" FontWeight="SemiBold"
+                      Content="Show all variables" IsChecked="{Binding ShowAll}"
+                      ToolTip="Also list the variables the game's dialogs use that this save hasn't set yet"/>
+            <TextBlock Grid.Column="3" Text="{Binding CountText}" VerticalAlignment="Center" Opacity="0.8"/>
         </Grid>
 
         <!-- Variables DataGrid -->
@@ -89,9 +83,21 @@
                       BorderThickness="0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                    <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="200"/>
+                    <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="170"/>
                     <DataGridTextColumn Header="Type" Binding="{Binding ValueType}" Width="80"/>
+                    <DataGridTextColumn Header="Used in dialogs" Binding="{Binding UsedIn}" Width="220"/>
                 </DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <!-- Variables the game knows but this save hasn't set -->
+                            <DataTrigger Binding="{Binding IsSet}" Value="False">
+                                <Setter Property="Opacity" Value="0.55"/>
+                                <Setter Property="FontStyle" Value="Italic"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
             </DataGrid>
         </Border>
 
@@ -102,6 +108,10 @@
                 BorderThickness="1"
                 Padding="16">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -139,6 +149,8 @@
                             Style="{StaticResource RedButton}"
                             MinWidth="80"/>
                 </StackPanel>
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="5" Margin="0,10,0,0" Text="{Binding SelectedHint}"
+                           TextWrapping="Wrap" Opacity="0.8"/>
             </Grid>
         </Border>
     </Grid>

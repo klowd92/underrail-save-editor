@@ -103,6 +103,22 @@ static class Program
                     Console.WriteLine(Colored(result.Item.Tooltip(save?.Player)));
                 break;
             }
+            case "vars":
+            {
+                var sw2 = Stopwatch.StartNew();
+                var known = rt.KnownVariables;
+                Console.WriteLine($"{known.Count} variables from dialogs ({sw2.ElapsedMilliseconds} ms); by type: " +
+                    string.Join(", ", known.GroupBy(v => v.ValueType.Name).Select(g => $"{g.Key} {g.Count()}")));
+                foreach (var v in known.Where(v => args.Length < 2 || v.Name.IndexOf(args[1], StringComparison.OrdinalIgnoreCase) >= 0).Take(15))
+                    Console.WriteLine($"  {v.Name,-45} {v.ValueType.Name,-7} {string.Join(", ", v.Dialogs.Take(4))}");
+                if (args.Length > 2)
+                {
+                    var saved = SaveGame.Load(rt, args[2]).Variables.All.Select(kv => kv.Key).ToList();
+                    var names = new System.Collections.Generic.HashSet<string>(known.Select(v => v.Name));
+                    Console.WriteLine($"save has {saved.Count}; known {saved.Count(names.Contains)}; known but not in save {names.Count - saved.Count(names.Contains)}");
+                }
+                break;
+            }
             case "check":
             {
                 var problems = rt.SelfCheck();

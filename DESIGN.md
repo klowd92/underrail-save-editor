@@ -123,6 +123,12 @@ Lesson learned: don't read arbitrary static fields to find something. That runs 
   The player is the first object serialized. Verified against full loads on all 100 readable saves; about 0.5 s for 109 saves.
 - **Feat requirements**: the feat's `List<RQX> X()`, each requirement's `ToString()` (the game's own wording: "Agility 7", "Any psi skill 40", "Feat: Psi Empathy") and its `bool X(character)` for met/unmet. This is what the game's feat screen shows.
 - **Skill details**: description `Localize("Skills/" + Name + variant)`, related abilities from `BaseAbilityBonuses` and synergies from `Synergies` (real property names, keyed by ability/skill class), as on the game's skill screen.
+- **Known variables**: every `.udlg` dialog is loaded with the game's serializer (in parallel, about 1 s) and its object graph walked.
+  Conditions and actions that name a variable by path give its name and type: `BC`/`SBFV` bool, `ICC`/`SIFV`/`MIFV` int, `SC1`/`SSFV` string, `FCC`/`MFFV` float, `SGUIDFV` Guid; path key `CIC:P` or `SFVA:P`.
+  Only `context.<name>` is global state the save stores. `tempcontext.` is dialog scratch space, and `context.X.Y` reaches into an object.
+  Maps add almost nothing (sampled: 1 new name per 400 zone files) and take minutes to scan, so they are skipped.
+  Code string literals mix state names with item property names, so they are skipped too.
+  Variables made at run time (event timers, per-boat flags) can't be known in advance.
 - **Descriptions**: feats `Localize("Feats/" + key, args)` and specializations `Localize("Specialization/" + id, args)`, the same calls the game's screens make.
   The localization class is found as the static class whose `string X(string)` splits keys on "/".
 
