@@ -47,6 +47,7 @@ namespace UnderrailSaveEditor.App.ViewModels
         private bool _passive;
         private bool _ethereal;
         private bool _psiEmpathy;
+        private string _dodge, _evasion, _fortitude, _resolve, _weaponCritAgainst, _psiCritAgainst, _armorPenalty;
 
         public CapabilitiesTabViewModel()
         {
@@ -78,6 +79,15 @@ namespace UnderrailSaveEditor.App.ViewModels
         public bool Ethereal { get => _ethereal; set { if (SetProperty(ref _ethereal, value)) Edit(() => P.Ethereal = value); } }
         public bool PsiEmpathy { get => _psiEmpathy; set { if (SetProperty(ref _psiEmpathy, value)) Edit(() => P.PsiEmpathy = value); } }
 
+        // Defense (read-only: the game recomputes these)
+        public string Dodge { get => _dodge; private set => SetProperty(ref _dodge, value); }
+        public string Evasion { get => _evasion; private set => SetProperty(ref _evasion, value); }
+        public string Fortitude { get => _fortitude; private set => SetProperty(ref _fortitude, value); }
+        public string Resolve { get => _resolve; private set => SetProperty(ref _resolve, value); }
+        public string WeaponCritChanceAgainst { get => _weaponCritAgainst; private set => SetProperty(ref _weaponCritAgainst, value); }
+        public string PsiCritChanceAgainst { get => _psiCritAgainst; private set => SetProperty(ref _psiCritAgainst, value); }
+        public string ArmorPenalty { get => _armorPenalty; private set => SetProperty(ref _armorPenalty, value); }
+
         protected override void OnLoad()
         {
             if (Immunities.Count == 0)
@@ -104,6 +114,16 @@ namespace UnderrailSaveEditor.App.ViewModels
             PsiEmpathy = P.PsiEmpathy;
             foreach (var immunity in Immunities)
                 immunity.IsEnabled = P.HasImmunity(immunity.Flag);
+            Dodge = P.Dodge.ToString();
+            Evasion = P.Evasion.ToString();
+            Fortitude = P.Fortitude.ToString();
+            Resolve = P.Resolve.ToString();
+            // Formatted like the game's combat stats window.
+            WeaponCritChanceAgainst = SignedPercent(P.WeaponCritChanceAgainst);
+            PsiCritChanceAgainst = SignedPercent(P.PsiCritChanceAgainst);
+            ArmorPenalty = (int)(P.ArmorPenalty * 100) + "%";
         }
+
+        private static string SignedPercent(double v) => (v >= 0 ? "+" : "") + (v * 100).ToString("0.00") + "%";
     }
 }

@@ -20,6 +20,16 @@ Built .exe files need `chmod +x` before running them from WSL. Close the running
 - Never write into an existing save of the user's; write to a new folder (Save As / `edit <save> <newDir>`).
 - Saves written by the v1 editor contain the assembly name `UnderrailSaveEditor` and can't be loaded by the game or by Core.
 
+## Investigating the game
+
+See RESEARCH.md (method and findings). The traps that cost time:
+- underrail.exe is 32-bit: script it from `/mnt/c/Windows/SysWOW64/WindowsPowerShell/v1.0/powershell.exe`, with the game folder as the current directory. Load our DLLs with `Assembly.Load(File.ReadAllBytes(...))`, since `\\wsl.localhost` paths are refused.
+- Obfuscated overrides of virtual properties are renamed (`Enabled` → `ae6()`). Read them through the base type's `PropertyInfo`, not PowerShell's `$obj.Enabled`.
+- Decompiled `.cs` files are CRLF + BOM (grep `$` never matches).
+- Data files are NRBF after a 24-byte header, often gzipped. Parse them with `nrbf.py` (as `tools/savediff.py` does), never a raw byte search.
+- Before calling something unobtainable, check every grant path (RESEARCH.md), including string keys inside `[ayh("...")]` script hooks.
+- Check the wiki first; it documents most feats and items.
+
 ## Game updates
 
 Tested versions live in `GameRuntime.TestedGameVersions` / `TestedDataModelVersions` (GameRuntime.Check.cs).

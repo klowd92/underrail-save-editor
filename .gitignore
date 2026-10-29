@@ -2,6 +2,7 @@ bin/
 obj/
 .vs/
 *.user
+__pycache__/
 
 # Local reference screenshots of the game (Stygian Software's artwork) - not part of the project.
 screenshot/

@@ -248,6 +248,29 @@ namespace UnderrailSaveEditor.Core
         public bool Ethereal { get => Get<bool>("Ethereal"); set { Set("Ethereal", value); Set("EtherealBase", value); } }
         public bool PsiEmpathy { get => Get<bool>("PsiEmpathy"); set => Set("PsiEmpathy", value); }
 
+        // ---- defense ----------------------------------------------------------------------------
+        // The Defense tab of the game's combat stats window. The game recomputes these from abilities, skills, feats
+        // and gear, so they are read-only here and show the values stored in the save (edits show up in-game).
+
+        internal static readonly string[] DefenseKeys = { "CD1:D", "CD1:E", "CD1:F", "CD1:R", "CD1:Q", "CD1:PCM", "CD1:E1" };
+
+        public int Dodge => DefenseKey<int>("CD1:D");
+        public int Evasion => DefenseKey<int>("CD1:E");
+        public int Fortitude => DefenseKey<int>("CD1:F");
+        public int Resolve => DefenseKey<int>("CD1:R");
+        /// <summary>Added to enemies' weapon crit chance against this character (0.05 = +5%).</summary>
+        public double WeaponCritChanceAgainst => DefenseKey<double>("CD1:Q");
+        /// <summary>Added to enemies' psi crit chance against this character (0.05 = +5%).</summary>
+        public double PsiCritChanceAgainst => DefenseKey<double>("CD1:PCM");
+        /// <summary>Armor penalty from worn gear, 0 to 0.95.</summary>
+        public double ArmorPenalty => DefenseKey<double>("CD1:E1");
+
+        private T DefenseKey<T>(string key)
+        {
+            var defense = Prop(_p, "Defense");
+            return (T)Il.FieldForKey(defense.GetType(), key).GetValue(defense);
+        }
+
         /// <summary>Single-flag names of the game's CharacterImmunities enum, in declaration order.</summary>
         public IReadOnlyList<string> ImmunityOptions
         {

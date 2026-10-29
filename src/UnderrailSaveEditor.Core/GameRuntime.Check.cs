@@ -28,7 +28,7 @@ namespace UnderrailSaveEditor.Core
                 catch (Exception ex) { problems.Add($"{what}: {ex.GetBaseException().Message}"); }
             }
 
-            foreach (var tag in new[] { "TG", "SGI", "C1", "PC1", "P2", "II", "I", "CI", "RT", "ISD", "ID", "RQX", "S5" })
+            foreach (var tag in new[] { "TG", "SGI", "C1", "PC1", "P2", "II", "I", "CI", "RT", "ISD", "ID", "RQX", "S5", "CD1" })
                 Check($"type tag {tag}", () => TypeForTag(tag));
             Check("game state fields", () =>
             {
@@ -40,11 +40,16 @@ namespace UnderrailSaveEditor.Core
                 foreach (var key in new[] { "PC1:E", "PC1:BAPC", "PC1:SPC", "PC1:FC", "PC1:SP" })
                     Il.FieldForKey(TypeForTag("PC1"), key);
             });
+            Check("defense fields", () =>
+            {
+                foreach (var key in Character.DefenseKeys)
+                    Il.FieldForKey(TypeForTag("CD1"), key);
+            });
             Check("character properties", () =>
             {
                 var t = TypeForTag("C1");
                 foreach (var name in new[] { "Name", "Level", "Gender", "Portrait", "BaseAbilities", "Skills", "Feats", "Specializations",
-                    "Bag", "Gear", "Immunities", "ImmunitiesBase", "MovementSpeed", "CarryCapacity" })
+                    "Bag", "Gear", "Immunities", "ImmunitiesBase", "MovementSpeed", "CarryCapacity", "Defense" })
                 {
                     if (t.GetProperty(name) == null)
                         throw new MissingMemberException(t.Name, name);

@@ -186,8 +186,75 @@
                     </Border>
                 </StackPanel>
 
-                <!-- Right Column: Immunities -->
+                <!-- Right Column: Defense, Immunities -->
                 <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                    <TextBlock Text="Defense"
+                               FontSize="14" FontWeight="SemiBold"
+                               Foreground="{DynamicResource AccentOrange}"
+                               Margin="0,0,0,8"/>
+
+                    <Border Background="{DynamicResource BackgroundMedium}"
+                            BorderBrush="{DynamicResource BorderDim}"
+                            BorderThickness="1"
+                            Padding="12"
+                            Margin="0,0,0,16">
+                        <StackPanel>
+                            <TextBlock Text="Computed by the game from abilities, skills, feats and gear. Shown as stored in the save; edits show up after the game loads it."
+                                       TextWrapping="Wrap" Margin="0,0,0,10"
+                                       Foreground="{DynamicResource TextSecondary}"/>
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="170"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Dodge" Margin="0,0,0,6"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Dodge}" Margin="0,0,0,6"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Evasion" Margin="0,0,0,6"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Evasion}" Margin="0,0,0,6"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Fortitude" Margin="0,0,0,6"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Fortitude}" Margin="0,0,0,6"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Resolve" Margin="0,0,0,6"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Resolve}" Margin="0,0,0,6"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Crit Chance vs You" Margin="0,0,0,6"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding WeaponCritChanceAgainst}" Margin="0,0,0,6"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Psi Crit Chance vs You" Margin="0,0,0,6"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding PsiCritChanceAgainst}" Margin="0,0,0,6"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Armor Penalty"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                            <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding ArmorPenalty}"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{DynamicResource TextPrimary}"/>
+                        </Grid>
+                        </StackPanel>
+                    </Border>
+
                     <TextBlock Text="Immunities"
                                FontSize="14" FontWeight="SemiBold"
                                Foreground="{DynamicResource AccentOrange}"

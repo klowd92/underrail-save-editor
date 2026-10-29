@@ -284,6 +284,7 @@ static class Program
         Console.WriteLine("specs     " + string.Join(", ", rt.Specializations
             .Select(x => (x.Id, v: p.GetSpecialization(x.Id))).Where(x => x.v > 0).Select(x => $"{x.Id}={x.v}")));
         Console.WriteLine($"caps      move {p.MovementSpeed}/{p.BaseMovementSpeed} carry {p.CarryCapacity} sight {p.SightRange} darkvision {p.Darkvision} truesight {p.Truesighted} detection {p.Detection} detmod {p.DetectionModifier} dead {p.Dead} ethereal {p.Ethereal} psiEmpathy {p.PsiEmpathy}");
+        Console.WriteLine($"defense   dodge {p.Dodge} evasion {p.Evasion} fortitude {p.Fortitude} resolve {p.Resolve} critAgainst {p.WeaponCritChanceAgainst:+0.00%;-0.00%} psiCritAgainst {p.PsiCritChanceAgainst:+0.00%;-0.00%} armorPenalty {p.ArmorPenalty:0%}");
         Console.WriteLine("immune    " + string.Join(", ", p.ImmunityOptions.Where(p.HasImmunity)));
         Console.WriteLine($"variables {save.Variables.All.Count}");
     }

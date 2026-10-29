@@ -14,7 +14,7 @@ feat grants its abilities, exactly as in the game.
 - **Base abilities** and **skills**. Skills show the effective value with bonuses, the game's description, the related ability and synergies.
 - **Feats**: all feats of the installed game and DLCs, with the game's icons, descriptions and requirements (checked against the character).
 - **Specializations**: points per specialization, with descriptions and maximums from the game.
-- **Capabilities**: movement, vision, detection, status flags and immunities.
+- **Capabilities**: movement, vision, detection, status flags and immunities, plus the game's computed defense values (Dodge, Evasion, Fortitude, Resolve, crit chance against you, armor penalty) for reference.
 - **Inventory**: equipped items and bag with the game's tooltips. Edit stacks, quality and durability; remove items; add any of the game's 1,400+ items.
 - **Crafting simulator**: all blueprints, laid out like the game's crafting window. Pick components and qualities to see the resulting item, its stats and the skill requirements.
   The game's own blueprint code computes the result, with the character's crafting feats applied. *Create* puts the item in the bag.
@@ -52,6 +52,7 @@ Everything targets **x86**, because `underrail.exe` is a 32-bit assembly and mus
 | `src/UnderrailSaveEditor.App` | The WPF editor. |
 | `tools/SaveTool` | Command-line front end to Core, for testing and scripting (`check`, `info`, `items`, `catalog`, `blueprints`, `craft`, `edit`...). |
 | `tools/savediff.py` | Structural diff of two save files. Needs an MS-NRBF reader module (`nrbf.py`) on its path. |
+| `RESEARCH.md` | Findings about the game itself: hidden feats, blueprint sources, Coral and charms, and how to investigate. |
 | `DESIGN.md` | How it works: hosting the game's code, finding things in an obfuscated assembly, icons, and why an earlier editor's saves were rejected by the game. |
 
 ## Known limitations and TODO
